@@ -1,2 +1,2 @@
 # meal-planner
-Recipe storage and weekly meal planner to help with buying groceies and reducing food waste
+Recipe storage and meal planner to help with buying groceries and reducing food waste
