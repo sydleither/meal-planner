@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from controller.input_controller import parse_data
 
 
 app = Flask(__name__, template_folder='view', static_folder='view')
@@ -9,10 +10,17 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/', methods=['POST'])
-def post():
+@app.route('/confirm', methods=['GET', 'POST'])
+def add_recipe():
     data = request.form
-    print(data) #convert data, then do regex to get ingredients into a list
+    name, ingredients, instructions = parse_data(data)
+    return render_template('confirm.html', name=name, ingredients=ingredients, instructions=instructions)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def confirm_recipe():
+    data = request.form
+    print(data)
     return render_template('index.html')
 
 
