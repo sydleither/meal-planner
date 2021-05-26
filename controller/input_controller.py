@@ -29,7 +29,7 @@ def normalize_ingredients(ingredients):
             note = re.findall('\(.*\)|,.*', item)
             note = note[0].strip(", ()") if len(note) > 0 else 'NONE'
             
-            item = re.sub('\(.*\)|,.*', '', item, 1)
+            item = re.sub('\(.*\)|,.*', '', item, 1).rstrip()
             
             final_ingredients.append({'item':item, 'quantity':quantity, 'measurement':measurement, 'note':note})
             
