@@ -14,17 +14,23 @@ def index():
 @app.route('/confirm', methods=['GET', 'POST'])
 def add_recipe():
     data = request.form
-    name, ingredients, instructions, meal_type, subtype, servings = parse_data(data)
+    global name, meal_type, subtype, servings, vegan
+    name, ingredients, instructions, meal_type, subtype, servings, vegan = parse_data(data)
     return render_template('confirm.html', name=name, ingredients=ingredients, \
                            instructions=instructions, meal_type=meal_type, \
-                            subtype=subtype, servings=servings)
+                            subtype=subtype, servings=servings, vegan=vegan)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def confirm_recipe():
     data = request.form
-    submit_data(data)
+    submit_data(data, name, meal_type, subtype, servings, vegan)
     return render_template('index.html')
+
+
+@app.route('/recipes', methods=['GET'])
+def view_recipes():
+    return render_template('recipes.html')
 
 
 if __name__ == '__main__':

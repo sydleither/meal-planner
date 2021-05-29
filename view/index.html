@@ -10,7 +10,7 @@
     <body>
         <form action="{{ url_for('add_recipe') }}" method="post">
             <label for="name">Recipe Name</label><br>
-            <input type="text" id="name" name="name" size="32"><br><br>
+            <input type="text" id="name" name="name" required="" size="32"><br><br>
             
             <label for="ingredients">Ingredients</label><br>
             <textarea id="ingredients" name="ingredients" cols="40" rows="5"></textarea><br><br>
@@ -36,6 +36,9 @@
             
             <label for="servings">Servings</label>
             <input type="number" id="servings" name="servings" min="1" value="1" size="3"><br><br>
+            
+            <input type="checkbox" id="vegan" name="vegan" value="Vegan">
+            <label for="vegan">Vegan</label><br><br>
             
             <input type="submit" value="Submit">
         </form>

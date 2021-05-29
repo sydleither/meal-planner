@@ -11,7 +11,7 @@
         <form action="{{ url_for('confirm_recipe') }}" method="post">
             {{ name }}<br><br>
             
-            {{ meal_type }}, {{ subtype }}, {{ servings }} Servings <br><br>
+            {{ meal_type }}, {{ subtype }}, {{ servings }} Servings{% if vegan == "Vegan" %}, {{ vegan }} {% endif %}<br><br>
             
             <label for="ingredients">Ingredients</label><br>
 <textarea id="ingredients" name="ingredients" cols="40" rows="10">

@@ -45,5 +45,6 @@ def parse_data(data):
     meal_type = data.get("type")
     subtype = data.get("subtype")
     servings = data.get("servings")
+    vegan = data.get("vegan")
     
-    return name, ingredients, instructions, meal_type, subtype, servings
+    return name, ingredients, instructions, meal_type, subtype, servings, vegan
