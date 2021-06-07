@@ -8,6 +8,7 @@ cur = con.cursor()
 cur.execute('''CREATE TABLE recipe (
     recipe_id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
+    link TEXT,
     instructions TEXT,
     meal_type TEXT,
     subtype TEXT,

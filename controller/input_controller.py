@@ -42,9 +42,10 @@ def parse_data(data):
     name = data.get("name")
     ingredients = normalize_ingredients(data.get("ingredients"))
     instructions = data.get("instructions")
+    link = data.get("link")
     meal_type = data.get("type")
     subtype = data.get("subtype")
     servings = data.get("servings")
     vegan = data.get("vegan")
     
-    return name, ingredients, instructions, meal_type, subtype, servings, vegan
+    return name, link, ingredients, instructions, meal_type, subtype, servings, vegan

@@ -22,13 +22,13 @@ def ingredients_to_list(ingredients):
     return final_ingredients
 
 
-def submit_data(data, name, meal_type, subtype, servings, vegan):
+def submit_data(data, name, link, meal_type, subtype, servings, vegan):
     data = data.to_dict()
     
     ingredients = ingredients_to_list(data.get("ingredients"))
     instructions = data.get("instructions")
-    
-    recipe = Recipe(name, instructions, meal_type, subtype, servings, vegan)
+
+    recipe = Recipe(name, instructions, link, meal_type, subtype, servings, vegan)
     ingredient_object_list = []
     for ingredient in ingredients: #TODO check that ingredient is not already in the database
         ingredient_object_list.append(Ingredient(ingredient.get('item')))
@@ -42,4 +42,4 @@ def submit_data(data, name, meal_type, subtype, servings, vegan):
                                    ingredient.get('measurement'), ingredient.get('note'))
         quantity_object_list.append(quantity_object)
         
-    quantity_ids = add_quantities_to_database(quantity_object_list)
+    quantity_ids = add_quantities_to_database(quantity_object_list) #TODO

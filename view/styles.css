@@ -1,3 +1,14 @@
 body {
     background-color: #b5739d;
 }
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+tbody td {
+  text-align: center;
+}
+thead th{
+  font-weight: 700;
+}

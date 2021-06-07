@@ -1,7 +1,8 @@
 class Recipe(object):
-    def __init__(self, name, instructions, meal_type, subtype, servings, vegan, selected=False):
+    def __init__(self, name, instructions, link, meal_type, subtype, servings, vegan, selected=False):
         self.name = name
         self.instructions = instructions
+        self.link = link
         self.meal_type = meal_type
         self.subtype = subtype
         self.servings = servings
