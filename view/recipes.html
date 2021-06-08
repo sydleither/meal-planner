@@ -22,6 +22,8 @@
                     {% for r in row %}
                         {% if row.index(r) == 1 %}
                             <td><a href="recipe?id={{ row[0] }}">{{ r }}</a></td>
+                        {% elif row.index(r) == 2 %}
+                            <td><a href="{{ r }}" target="_blank">{{ r }}</a></td>
                         {% else %}
                             <td>{{ r }}</td>
                         {% endif %}

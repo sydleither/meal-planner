@@ -37,9 +37,9 @@ def submit_data(data, name, link, meal_type, subtype, servings, vegan):
     ingredient_ids = add_ingredients_to_database(ingredient_object_list)
     
     quantity_object_list = []
-    for ingredient_id in ingredient_ids:
-        quantity_object = Quantity(recipe_id, ingredient_id, ingredient.get('quantity'), \
-                                   ingredient.get('measurement'), ingredient.get('note'))
+    for i,ingredient_id in enumerate(ingredient_ids):
+        quantity_object = Quantity(recipe_id, ingredient_id, ingredients[i].get('quantity'), \
+                                   ingredients[i].get('measurement'), ingredients[i].get('note'))
         quantity_object_list.append(quantity_object)
         
     quantity_ids = add_quantities_to_database(quantity_object_list) #TODO
