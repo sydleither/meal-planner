@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+          <title>Meal Planner</title>
+          <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
+    </head>
+
+    <body>
+        <form action="{{ url_for('new_planner') }}" method="post">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+                {% for meal in ["Breakfast", "Lunch", "Dinner", "Sides", "Other"] %}
+                    <tr>
+                        <th>{{ meal }}</th>
+                        {% for day in ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"] %}
+                            {% if meal == "Sides" %}
+                                <td><input type="text" id="{{ day }}_{{ meal }}" name="{{ day }}_{{ meal }}" size=8></td>
+                            {% else %}
+                                <td><select name="{{ day }}_{{ meal }}" id="{{ day }}_{{ meal }}">
+                                    <option value=""></option>
+                                    {% for recipe in recipes %}
+                                        <option value="{{ recipe[0] }}">{{ recipe[1] }}</option>
+                                    {% endfor %}
+                                    <option value="Leftovers">Leftovers</option>
+                                </select></td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <div style="text-align:center;">
+                <br><input type="submit" value="Submit">
+            </div>
+        </form>
+    </body>
+</html>

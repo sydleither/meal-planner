@@ -1,5 +1,3 @@
-#TODO name this file something better
-
 import re
 from fractions import Fraction
 

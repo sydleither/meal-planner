@@ -3,6 +3,7 @@ Recipe storage and meal planner to help with buying groceries and reducing food 
 
 # Features
 Automatically parse copy-pasted recipes (extract out amount, ingredients)
+
 View individual and all recipes in database
 
 # Coming Soon
@@ -15,3 +16,5 @@ Randomly pick recipes for you to plan out for the week based on type (breakfast,
 Modify recipes
 
 (maybe) Web scrape /r/recipes or another website to automatically search and add recipes
+
+(maybe) Nutrition info, calories

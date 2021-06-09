@@ -7,7 +7,7 @@ class Recipe(object):
         self.subtype = subtype
         self.servings = servings
         self.vegan = vegan
-        self.selected = selected
+        self.selected = selected #TODO remove this
         
         
 class Ingredient(object):

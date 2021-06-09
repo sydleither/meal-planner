@@ -22,7 +22,7 @@ def ingredients_to_list(ingredients):
     return final_ingredients
 
 
-def submit_data(data, name, link, meal_type, subtype, servings, vegan):
+def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
     data = data.to_dict()
     
     ingredients = ingredients_to_list(data.get("ingredients"))
@@ -43,3 +43,7 @@ def submit_data(data, name, link, meal_type, subtype, servings, vegan):
         quantity_object_list.append(quantity_object)
         
     quantity_ids = add_quantities_to_database(quantity_object_list) #TODO
+    
+    
+def submit_planner(data):
+    print(data)
