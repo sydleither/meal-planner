@@ -1,5 +1,4 @@
 import re
-import collections
 from model.types import Recipe, Ingredient, Quantity, Planner
 from model.recipe_model import add_recipe_to_database
 from model.ingredient_model import add_ingredients_to_database
@@ -25,7 +24,6 @@ def ingredients_to_list(ingredients):
 
 
 def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
-    print('TEMP')
     data = data.to_dict()
     
     ingredients = ingredients_to_list(data.get("ingredients"))
@@ -45,7 +43,7 @@ def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
                                    ingredients[i].get('measurement'), ingredients[i].get('note'))
         quantity_object_list.append(quantity_object)
         
-    quantity_ids = add_quantities_to_database(quantity_object_list) #TODO
+    add_quantities_to_database(quantity_object_list)
     
     
 def submit_planner(data):

@@ -1,7 +1,6 @@
 import sqlite3
 
 
-
 def add_planner_to_database(planner):
     con = sqlite3.connect('model/database.db')
     cur = con.cursor()
