@@ -1,8 +1,10 @@
 import re
-from model.types import Recipe, Ingredient, Quantity
+import collections
+from model.types import Recipe, Ingredient, Quantity, Planner
 from model.recipe_model import add_recipe_to_database
 from model.ingredient_model import add_ingredients_to_database
 from model.quantity_model import add_quantities_to_database
+from model.planner_model import add_planner_to_database, clear_planner
 
 
 def ingredients_to_list(ingredients):
@@ -23,6 +25,7 @@ def ingredients_to_list(ingredients):
 
 
 def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
+    print('TEMP')
     data = data.to_dict()
     
     ingredients = ingredients_to_list(data.get("ingredients"))
@@ -46,4 +49,13 @@ def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
     
     
 def submit_planner(data):
-    print(data)
+    data = list(data.items())
+    
+    planner_list = []
+    for i in range(0,len(data),7):
+        planner = Planner(data[i][0][7:], data[i][1], data[i+1][1], data[i+2][1], \
+                          data[i+3][1], data[i+4][1], data[i+5][1], data[i+6][1])
+        planner_list.append(planner)
+    
+    clear_planner()
+    add_planner_to_database(planner_list)

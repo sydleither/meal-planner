@@ -7,20 +7,30 @@ from controller.model_to_view import all_recipes, single_recipe
 app = Flask(__name__, template_folder='view', static_folder='view')
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
 
-@app.route('/planner/new', methods=['GET', 'POST'])
+@app.route('/planner/new', methods=['GET'])
 def new_planner():
-    data = request.form
-    submit_planner(data)
     recipes = all_recipes()
     return render_template('new_planner.html', recipes=recipes)
 
 
-@app.route('/confirm', methods=['GET', 'POST'])
+@app.route('/planner', methods=['POST'])
+def new_planner_submit():
+    data = request.form
+    submit_planner(data)
+    return render_template('planner.html')
+
+
+@app.route('/planner', methods=['GET'])
+def view_planner():
+    return render_template('planner.html')
+
+
+@app.route('/confirm', methods=['POST'])
 def add_recipe():
     data = request.form
     global name, link, meal_type, subtype, servings, vegan
@@ -30,7 +40,7 @@ def add_recipe():
                             subtype=subtype, servings=servings, vegan=vegan)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def confirm_recipe():
     data = request.form
     submit_recipe(data, name, link, meal_type, subtype, servings, vegan)

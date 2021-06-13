@@ -13,8 +13,7 @@ cur.execute('''CREATE TABLE recipe (
     meal_type TEXT,
     subtype TEXT,
     servings NUMERIC,
-    vegan INTEGER,
-    selected INTEGER
+    vegan INTEGER
     );''')
 cur.execute('''CREATE TABLE ingredient (
     ingredient_id INTEGER PRIMARY KEY,
@@ -28,6 +27,17 @@ cur.execute('''CREATE TABLE quantity (
     amount REAL,
     measurement TEXT,
     note TEXT
+    );''')
+cur.execute('''CREATE TABLE planner (
+    planner_id INTEGER PRIMARY KEY,
+    meal TEXT NOT NULL,
+    monday TEXT,
+    tuesday TEXT,
+    wednesday TEXT,
+    thursday TEXT,
+    friday TEXT,
+    saturday TEXT,
+    sunday TEXT
     );''')
 
 con.commit()

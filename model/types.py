@@ -1,5 +1,5 @@
 class Recipe(object):
-    def __init__(self, name, instructions, link, meal_type, subtype, servings, vegan, selected=False):
+    def __init__(self, name, instructions, link, meal_type, subtype, servings, vegan):
         self.name = name
         self.instructions = instructions
         self.link = link
@@ -7,7 +7,6 @@ class Recipe(object):
         self.subtype = subtype
         self.servings = servings
         self.vegan = vegan
-        self.selected = selected #TODO remove this
         
         
 class Ingredient(object):
@@ -23,3 +22,15 @@ class Quantity(object):
         self.amount = amount
         self.measurement = measurement
         self.note = note
+        
+        
+class Planner(object):
+    def __init__(self, meal, monday, tuesday, wednesday, thursday, friday, saturday, sunday):
+        self.meal = meal
+        self.monday = monday
+        self.tuesday = tuesday
+        self.wednesday = wednesday
+        self.thursday = thursday
+        self.friday = friday
+        self.saturday = saturday
+        self.sunday = sunday
