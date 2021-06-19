@@ -22,3 +22,11 @@ def clear_planner():
     cur.execute('VACUUM;')
     con.commit()
     con.close()
+    
+    
+def get_planner():
+    con = sqlite3.connect('model/database.db')
+    cur = con.cursor()
+    query = 'SELECT meal,monday,tuesday,wednesday,thursday,friday,saturday,sunday FROM planner'
+    rows = cur.execute(query).fetchall()
+    return rows

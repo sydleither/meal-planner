@@ -7,6 +7,28 @@
     </head>
 
     <body>
-    {{ recipes }}
+        <table>
+            <tr>
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+            {% for meal in planner %}
+                <tr>
+                    {% for day in meal %}
+                        {% if day[0] != 0 %}
+                            <td><a href="recipe?id={{ day[0] }}">{{ day[1] }}</a></td>
+                        {% else %}
+                            <td>{{ day[1] }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
     </body>
 </html>

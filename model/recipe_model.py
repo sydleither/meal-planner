@@ -31,6 +31,15 @@ def get_single_recipe(recipe_id):
     return row
 
 
+def get_single_recipe_name(recipe_id):
+    con = sqlite3.connect('model/database.db')
+    cur = con.cursor()
+    query = 'SELECT name FROM recipe r WHERE r.recipe_id=?'
+    row = cur.execute(query, recipe_id).fetchone()[0]
+    return row
+
+
+
 def get_recipe_ingredients(recipe_id):
     con = sqlite3.connect('model/database.db')
     cur = con.cursor()

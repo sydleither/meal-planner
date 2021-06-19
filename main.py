@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from controller.recipe_input_parser import parse_data
 from controller.view_to_model import submit_recipe, submit_planner
-from controller.model_to_view import all_recipes, single_recipe
+from controller.model_to_view import all_recipes, single_recipe, planner
 
 
 app = Flask(__name__, template_folder='view', static_folder='view')
@@ -22,12 +22,14 @@ def new_planner():
 def new_planner_submit():
     data = request.form
     submit_planner(data)
-    return render_template('planner.html')
+    planner_data = planner()
+    return render_template('planner.html', planner=planner_data)
 
 
 @app.route('/planner', methods=['GET'])
 def view_planner():
-    return render_template('planner.html')
+    planner_data = planner()
+    return render_template('planner.html', planner=planner_data)
 
 
 @app.route('/confirm', methods=['POST'])
