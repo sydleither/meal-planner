@@ -30,3 +30,11 @@ def get_planner():
     query = 'SELECT meal,monday,tuesday,wednesday,thursday,friday,saturday,sunday FROM planner'
     rows = cur.execute(query).fetchall()
     return rows
+
+
+def get_planner_recipe_ids():
+    con = sqlite3.connect('model/database.db')
+    cur = con.cursor()
+    query = 'SELECT monday,tuesday,wednesday,thursday,friday,saturday,sunday FROM planner'
+    rows = cur.execute(query).fetchall()
+    return rows

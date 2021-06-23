@@ -15,3 +15,14 @@ def add_ingredients_to_database(ingredients):
     con.close()
     
     return ingredient_ids
+
+
+def is_duplicate(ingredient_name):
+    con = sqlite3.connect('model/database.db')
+    cur = con.cursor()
+    row = cur.execute('SELECT * FROM ingredient WHERE name=?', (ingredient_name,))
+    if row.fetchone():
+        return True
+    return False
+    
+    

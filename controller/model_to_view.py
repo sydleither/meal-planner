@@ -1,5 +1,6 @@
-from model.recipe_model import get_all_recipes, get_single_recipe, get_recipe_ingredients, get_single_recipe_name
-from model.planner_model import get_planner
+from model.recipe_model import get_all_recipes, get_single_recipe, \
+    get_recipe_ingredients, get_recipe_ingredients_with_ids, get_single_recipe_name
+from model.planner_model import get_planner, get_planner_recipe_ids
 
 
 def planner():
@@ -27,3 +28,21 @@ def single_recipe(recipe_id):
     recipe[3] = recipe[3].replace('\r\n\r\n', '\n')
     ingredients = get_recipe_ingredients(recipe_id)
     return recipe, ingredients
+
+
+def grocery_list():
+    planner = get_planner_recipe_ids()
+    recipes = [x for meal in planner for x in meal]
+
+    groceries = {}
+    for recipe in recipes:
+        try:
+            int(recipe)
+            ingredients = get_recipe_ingredients_with_ids(recipe)
+            for ingredient in ingredients:
+                if ingredient[0] in groceries:
+                    print(ingredient[0])
+                else:
+                    groceries[ingredient[0]] = [ingredient[1], ingredient[2], ingredient[3]]
+        except:
+            groceries[ingredient] = []
