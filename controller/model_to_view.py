@@ -41,8 +41,19 @@ def grocery_list():
             ingredients = get_recipe_ingredients_with_ids(recipe)
             for ingredient in ingredients:
                 if ingredient[0] in groceries:
-                    print(ingredient[0])
+                    new_grocery = add_measurements(ingredient[0], \
+                                                   groceries[ingredient[0]][1], \
+                                                   groceries[ingredient[0]][2], \
+                                                   ingredient[1], ingredient[2])
+                    groceries[ingredient[0]] = new_grocery
                 else:
                     groceries[ingredient[0]] = [ingredient[1], ingredient[2], ingredient[3]]
         except:
-            groceries[ingredient] = []
+            if recipe != '' and recipe != 'Leftovers':
+                groceries[recipe] = []
+    
+    
+def add_measurements(name, q1, m1, q2, m2): #TODO deal with meausrements not in list
+    measurements = open('controller/measurements.txt').read().split()
+    
+    return [name,0,'']

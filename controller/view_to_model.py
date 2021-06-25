@@ -1,7 +1,7 @@
 import re
 from model.types import Recipe, Ingredient, Quantity, Planner
 from model.recipe_model import add_recipe_to_database
-from model.ingredient_model import add_ingredients_to_database, is_duplicate
+from model.ingredient_model import add_ingredients_to_database
 from model.quantity_model import add_quantities_to_database
 from model.planner_model import add_planner_to_database, clear_planner
 
@@ -32,9 +32,7 @@ def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
     recipe = Recipe(name, instructions, link, meal_type, subtype, servings, vegan)
     ingredient_object_list = []
     for ingredient in ingredients:
-        ingredient_name = ingredient.get('item')
-        if not is_duplicate(ingredient_name):
-            ingredient_object_list.append(Ingredient(ingredient_name))
+        ingredient_object_list.append(Ingredient(ingredient.get('item')))
     
     recipe_id = add_recipe_to_database(recipe)
     ingredient_ids = add_ingredients_to_database(ingredient_object_list)
