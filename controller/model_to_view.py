@@ -53,7 +53,37 @@ def grocery_list():
                 groceries[recipe] = []
     
     
-def add_measurements(name, q1, m1, q2, m2): #TODO deal with meausrements not in list
-    measurements = open('controller/measurements.txt').read().split()
+def add_measurements(name, q1, m1, q2, m2):
+    measurements = {} #TODO read in measurements dict
+    m1_cat = ''
+    m2_cat = ''
+    q_temp = 0
+    final_quantity = 0
+    final_measurement = ''
     
-    return [name,0,'']
+    if m1 == m2:
+        final_measurement = m1
+        q_temp = q1+q2
+    else:
+        for key,value in measurements.items():
+            if m1 in value[0]:
+                m1_cat = key
+            if m2 in value[0]:
+                m2_cat = key
+        if m1_cat != '' and m2_cat != '':
+            if m1_cat > m2_cat:
+                final_measurement = measurements[m1_cat][0]
+                q_temp = q2/(measurements[m1_cat]/measurements[m2_cat])
+            elif m2_cat < m1_cat:
+                final_measurement = measurements[m2_cat][0]
+                q_temp = q1/(measurements[m2_cat]/measurements[m1_cat])
+            else:
+                final_measurement = measurements[m1_cat][0]
+                q_temp = q1+q2
+        else:
+            return #TODO deal with meausrements not in list
+
+    if m1 == m2 or (m1_cat != '' and m2_cat != ''):
+        return #TODO convert quantity to proper measurement
+        
+    return [name,final_quantity,final_measurement]

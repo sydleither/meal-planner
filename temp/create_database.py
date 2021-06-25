@@ -2,7 +2,7 @@
 import sqlite3
 
 
-con = sqlite3.connect('database.db') #TODO better name
+con = sqlite3.connect('../model/database.db') #TODO better name
 cur = con.cursor()
 
 cur.execute('''CREATE TABLE recipe (
