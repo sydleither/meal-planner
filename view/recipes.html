@@ -1,35 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-          <title>Meal Planner</title>
-          <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
-    </head>
-
-    <body>
-        <table>
+{% extends "base.html" %}
+{% block content %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Link</th>
+            <th>Meal</th>
+            <th>Course</th>
+            <th>Servings</th>
+            <th>Vegan</th>
+        </tr>
+        {% for row in recipes %}
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Link</th>
-                <th>Meal</th>
-                <th>Course</th>
-                <th>Servings</th>
-                <th>Vegan</th>
+                {% for r in row %}
+                    {% if row.index(r) == 1 %}
+                        <td><a href="recipe?id={{ row[0] }}">{{ r }}</a></td>
+                    {% elif row.index(r) == 2 %}
+                        <td><a href="{{ r }}" target="_blank">{{ r }}</a></td>
+                    {% else %}
+                        <td>{{ r }}</td>
+                    {% endif %}
+                {% endfor %}
             </tr>
-            {% for row in recipes %}
-                <tr>
-                    {% for r in row %}
-                        {% if row.index(r) == 1 %}
-                            <td><a href="recipe?id={{ row[0] }}">{{ r }}</a></td>
-                        {% elif row.index(r) == 2 %}
-                            <td><a href="{{ r }}" target="_blank">{{ r }}</a></td>
-                        {% else %}
-                            <td>{{ r }}</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-    </body>
-</html>
+        {% endfor %}
+    </table>
+{% endblock %}

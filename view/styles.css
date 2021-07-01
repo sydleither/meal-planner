@@ -1,14 +1,24 @@
+.topnav {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #ff7675;
+}
+.nav-item {
+  padding: 1em;
+}
 body {
     background-color: #b5739d;
 }
 table {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
 }
 tbody td {
-  text-align: center;
+    text-align: center;
 }
 thead th{
-  font-weight: 700;
+    font-weight: 700;
 }

@@ -1,6 +1,7 @@
 from model.recipe_model import get_all_recipes, get_single_recipe, \
     get_recipe_ingredients, get_recipe_ingredients_with_ids, get_single_recipe_name
 from model.planner_model import get_planner, get_planner_recipe_ids
+from collections import OrderedDict
 
 
 def planner():
@@ -46,22 +47,33 @@ def grocery_list():
                                                    groceries[ingredient[0]][1], \
                                                    groceries[ingredient[0]][2], \
                                                    ingredient[2], ingredient[3])
-                    groceries[ingredient[0]] = new_grocery
+                    if new_grocery[0] == 1:
+                        groceries[ingredient[0]] = [ingredient[1], groceries[ingredient[0]][1], groceries[ingredient[0]][2]]
+                        groceries[ingredient[0]+.1] = [ingredient[1], ingredient[2], ingredient[3]]
+                    elif new_grocery[0] == 2:
+                        groceries[ingredient[0]] = [ingredient[1], ingredient[2], ingredient[3]]
+                        groceries[ingredient[0]+.1] = [ingredient[1], groceries[ingredient[0]][1], groceries[ingredient[0]][2]]
+                    elif new_grocery[0] == 3:
+                        groceries[ingredient[0]+.1] = [ingredient[1], ingredient[2], ingredient[3]]
+                        groceries[ingredient[0]+.2] = [ingredient[1], groceries[ingredient[0]][1], groceries[ingredient[0]][2]]
+                    else:
+                        groceries[ingredient[0]] = new_grocery
                 else:
                     groceries[ingredient[0]] = [ingredient[1], ingredient[2], ingredient[3]]
         except:
             if recipe != '' and recipe != 'Leftovers':
-                groceries[recipe] = []
+                groceries[0] = [recipe]
 
-    return groceries
+    groceries_sorted = OrderedDict(sorted(groceries.items()))
+    return groceries_sorted
 
 
 def create_measurement_dict():
     measurements = {}
     measurements[1] = [['gallon'], 16]
-    measurements[3] = [['quart'], 4]
-    measurements[4] = [['pint'], 2]
-    measurements[2] = [['cup', 'c', 'cups'], 1]
+    measurements[2] = [['quart'], 4]
+    measurements[3] = [['pint'], 2]
+    measurements[4] = [['cup', 'c', 'cups'], 1]
     measurements[5] = [['oz', 'ounce', 'ounces'], .125]
     measurements[6] = [['tbsp', 'tablespoon', 'tablespoons'], .0625]
     measurements[7] = [['tsp', 'teaspoon', 'teaspoons'], .0208]
@@ -71,8 +83,6 @@ def create_measurement_dict():
 def add_measurements(measurements, name, q1, m1, q2, m2):
     m1_cat = 0
     m2_cat = 0
-    q_temp = 0
-    m_temp = ''
     final_quantity = 0
     final_measurement = ''
 
@@ -83,23 +93,20 @@ def add_measurements(measurements, name, q1, m1, q2, m2):
             m2_cat = key
     if m1_cat != 0 and m2_cat != 0:
         if m1_cat > m2_cat:
-            m_temp = m1_cat
-            q_temp = q2/(measurements[m1_cat][1]/measurements[m2_cat][1])+q1
+            final_measurement = measurements[m1_cat][0][0]
+            final_quantity = q2/(measurements[m1_cat][1]/measurements[m2_cat][1])+q1
         elif m2_cat < m1_cat:
-            m_temp = m2_cat
-            q_temp = q1/(measurements[m2_cat][1]/measurements[m1_cat][1])+q2
+            final_measurement = measurements[m2_cat][0][0]
+            final_quantity = q1/(measurements[m2_cat][1]/measurements[m1_cat][1])+q2
         else:
-            m_temp = m1_cat
-            q_temp = q1+q2
+            final_measurement = measurements[m1_cat][0][0]
+            final_quantity = q1+q2
     else:
-        return #TODO deal with meausrements not in list
-
-    if m1 == m2 or (m1_cat != '' and m2_cat != ''):
-        q_in_cups = q_temp*measurements[m_temp][1]
-        for i in range(0,len(measurements)):
-            if q_in_cups == measurements[i+1][1]:
-                final_measurement = measurements[i+1][0][0]
-                final_quantity = q_in_cups/measurements[i+1][1]
-            #TODO check if between
+        if m1_cat == 0 and m2_cat != 0:
+            return [1]
+        elif m2_cat == 0 and m1_cat != 0:
+            return [2]
+        else:
+            return [3]
             
     return [name,final_quantity,final_measurement]

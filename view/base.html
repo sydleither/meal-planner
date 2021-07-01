@@ -1,0 +1,23 @@
+<html>
+    <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+          <title>Meal Planner</title>
+          <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
+    </head>
+    
+    <body>
+        <div id="header">
+            {% block header %}
+            <div class="topnav">
+                <a class="nav-item" href="/">Home</a>
+                <a class="nav-item" href="planner">Planner</a>
+                <a class="nav-item" href="groceries">Groceries</a>
+                <a class="nav-item" href="new">New Recipe</a>
+            </div> 
+            {% endblock %}
+        </div>
+        
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+</body>

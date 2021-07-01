@@ -12,6 +12,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/new', methods=['GET'])
+def new_recipe():
+    return render_template('new_recipe.html')
+
+
 @app.route('/planner/new', methods=['GET'])
 def new_planner():
     recipes = all_recipes()
@@ -48,11 +53,11 @@ def add_recipe():
                             subtype=subtype, servings=servings, vegan=vegan)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/new', methods=['POST'])
 def confirm_recipe():
     data = request.form
     submit_recipe(data, name, link, meal_type, subtype, servings, vegan)
-    return render_template('index.html')
+    return render_template('new_recipe.html')
 
 
 @app.route('/recipes', methods=['GET'])
