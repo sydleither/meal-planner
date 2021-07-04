@@ -22,7 +22,7 @@ def add_ingredients_to_database(ingredients):
 def is_duplicate(ingredient_name, return_id=False):
     con = sqlite3.connect('model/database.db')
     cur = con.cursor()
-    row = cur.execute('SELECT * FROM ingredient WHERE name=?', (ingredient_name,)).fetchone()
+    row = cur.execute('SELECT * FROM ingredient WHERE name=(?)', (ingredient_name,)).fetchone()
     if row and not return_id:
         return True
     elif row and return_id:

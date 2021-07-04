@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for row in recipe %}
+        {% if recipe.index(row) == 2 %}
+            <a href="{{ row }}" target="_blank">{{ row }}</a><br><br>
+        {% elif recipe.index(row) == 3 %}
+            <br>
+            {% for ingredient in ingredients %}
+                {% for i in ingredient %}
+                    {% if i != 'NONE' and i is not none %}
+                        {{ i }} 
+                    {% endif %}
+                {% endfor %}
+                <br><br>
+            {% endfor %}
+            <br>
+            {{ row }}<br><br>
+            <br>
+        {% elif recipe.index(row) == 6 %}
+            {{ row }} Servings<br><br>
+        {% elif row != '' %}
+            {{ row }}<br><br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

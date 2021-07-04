@@ -26,16 +26,16 @@ def get_all_recipes():
 def get_single_recipe(recipe_id):
     con = sqlite3.connect('model/database.db')
     cur = con.cursor()
-    query = 'SELECT * FROM recipe r WHERE r.recipe_id=?'
-    row = cur.execute(query, recipe_id).fetchone()
+    query = 'SELECT * FROM recipe r WHERE r.recipe_id=(?)'
+    row = cur.execute(query, (recipe_id,)).fetchone()
     return row
 
 
 def get_single_recipe_name(recipe_id):
     con = sqlite3.connect('model/database.db')
     cur = con.cursor()
-    query = 'SELECT name FROM recipe r WHERE r.recipe_id=?'
-    row = cur.execute(query, recipe_id).fetchone()[0]
+    query = 'SELECT name FROM recipe r WHERE r.recipe_id=(?)'
+    row = cur.execute(query, (recipe_id,)).fetchone()[0]
     return row
 
 
@@ -46,8 +46,8 @@ def get_recipe_ingredients(recipe_id):
             FROM recipe r \
             JOIN quantity q ON r.recipe_id=q.recipe_id \
             JOIN ingredient i ON i.ingredient_id = q.ingredient_id \
-            WHERE r.recipe_id=?'
-    rows = cur.execute(query, recipe_id).fetchall()
+            WHERE r.recipe_id=(?)'
+    rows = cur.execute(query, (recipe_id,)).fetchall()
     return rows
 
 
@@ -58,6 +58,6 @@ def get_recipe_ingredients_with_ids(recipe_id):
             FROM recipe r \
             JOIN quantity q ON r.recipe_id=q.recipe_id \
             JOIN ingredient i ON i.ingredient_id = q.ingredient_id \
-            WHERE r.recipe_id=?'
-    rows = cur.execute(query, recipe_id).fetchall()
+            WHERE r.recipe_id=(?)'
+    rows = cur.execute(query, (recipe_id,)).fetchall()
     return rows
