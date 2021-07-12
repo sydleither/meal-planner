@@ -1,6 +1,6 @@
 import re
 from model.types import Recipe, Ingredient, Quantity, Planner
-from model.recipe_model import add_recipe_to_database
+from model.recipe_model import add_recipe_to_database, delete_recipe_from_database
 from model.ingredient_model import add_ingredients_to_database
 from model.quantity_model import add_quantities_to_database
 from model.planner_model import add_planner_to_database, clear_planner
@@ -44,6 +44,10 @@ def submit_recipe(data, name, link, meal_type, subtype, servings, vegan):
         quantity_object_list.append(quantity_object)
         
     add_quantities_to_database(quantity_object_list)
+    
+    
+def delete_recipe(recipe_id):
+    delete_recipe_from_database(recipe_id)
     
     
 def submit_planner(data):

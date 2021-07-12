@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     {% for row in recipe %}
-        {% if recipe.index(row) == 2 %}
+        {% if recipe.index(row) == 0 %}
+            {% set recipe_id = row %}
+        {% elif recipe.index(row) == 2 %}
             <a href="{{ row }}" target="_blank">{{ row }}</a><br><br>
         {% elif recipe.index(row) == 3 %}
             <br>
@@ -22,4 +24,6 @@
             {{ row }}<br><br>
         {% endif %}
     {% endfor %}
+    <br>
+    <a href="/delete?id={{ recipe_id }}">Delete Recipe</a>
 {% endblock %}

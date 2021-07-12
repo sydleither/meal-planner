@@ -15,6 +15,15 @@ def add_recipe_to_database(recipe):
     return recipe_id
 
 
+def delete_recipe_from_database(recipe_id):
+    con = sqlite3.connect('model/database.db')
+    cur = con.cursor()
+    cur.execute('DELETE FROM recipe WHERE recipe_id=?', (recipe_id,))
+    cur.execute('DELETE FROM quantity WHERE recipe_id=?', (recipe_id,))
+    con.commit()
+    con.close()
+
+
 def get_all_recipes():
     con = sqlite3.connect('model/database.db')
     cur = con.cursor()

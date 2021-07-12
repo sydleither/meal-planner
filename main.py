@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from controller.recipe_input_parser import parse_data
-from controller.view_to_model import submit_recipe, submit_planner
+from controller.view_to_model import submit_recipe, submit_planner, delete_recipe
 from controller.model_to_view import all_recipes, single_recipe, planner, grocery_list
 
 
@@ -71,6 +71,12 @@ def view_recipe():
     recipe_id = request.args.get('id')
     recipe, ingredients = single_recipe(recipe_id)
     return render_template('recipe.html', recipe_id=recipe_id, recipe=recipe, ingredients=ingredients)
+
+
+@app.route('/delete', methods=['GET'])
+def remove_recipe():
+    delete_recipe(request.args.get('id'))
+    return redirect('recipes')
 
 
 if __name__ == '__main__':

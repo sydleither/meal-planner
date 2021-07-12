@@ -3,7 +3,7 @@
     list-style-type: none;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: #ff7675;
+    background-color: #ffc595;
 }
 .nav-item {
   padding: 1em;
@@ -15,7 +15,7 @@
     
 }
 body {
-    background-color: #b5739d;
+    background-color: #fdc3c2;
 }
 table {
     table-layout: fixed;
